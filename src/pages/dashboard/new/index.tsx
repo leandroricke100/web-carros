@@ -30,7 +30,6 @@ export function New() {
     handleSubmit,
     register,
     formState: { errors },
-    reset,
   } = useForm<FormData>({
     resolver: zodResolver(schema),
     mode: "onChange",
