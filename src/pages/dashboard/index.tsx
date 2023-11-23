@@ -10,7 +10,8 @@ import {
   doc,
   deleteDoc,
 } from "firebase/firestore";
-import { db } from "../../services/firebaseConnection";
+import { db, storage } from "../../services/firebaseConnection";
+import { deleteObject, ref } from "firebase/storage";
 import { AuthContext } from "../../contexts/AuthContext";
 
 import { FiTrash2 } from "react-icons/fi";
@@ -69,10 +70,23 @@ export function Dashboard() {
     loadCars();
   }, [user]);
 
-  async function handleDeleteCar(id: string) {
-    const docRef = doc(db, "cars", id);
+  async function handleDeleteCar(car: CarProps) {
+    const itemsCar = car;
+
+    const docRef = doc(db, "cars", itemsCar.id);
     await deleteDoc(docRef);
-    setCars(cars.filter((car) => car.id !== id));
+
+    itemsCar.images.map(async (image) => {
+      const imagePath = `images/${image.uid}/${image.name}`;
+      const imageRef = ref(storage, imagePath);
+
+      try {
+        await deleteObject(imageRef);
+        setCars(cars.filter((car) => car.id !== itemsCar.id));
+      } catch (erro) {
+        console.log(erro);
+      }
+    });
   }
 
   return (
@@ -83,7 +97,7 @@ export function Dashboard() {
           <section key={car.id} className="w-full bg-white rounded-lg relative">
             <button
               className="absolute bg-white  w-14 h-14 rounded-full flex items-center justify-center right-2 top-2 drop-shadow"
-              onClick={() => handleDeleteCar(car.id)}
+              onClick={() => handleDeleteCar(car)}
             >
               <FiTrash2 size={26} color="#000" />
             </button>

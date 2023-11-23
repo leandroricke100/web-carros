@@ -81,7 +81,7 @@ export function Home() {
               <div
                 className="w-full h-72 flex items-center justify-center rounded-lg bg-slate-200"
                 style={{
-                  display: loadImages.includes(car.id) ? "none" : "block",
+                  display: loadImages.includes(car.id) ? "none" : "visible",
                 }}
               >
                 <CgSpinner
@@ -96,7 +96,7 @@ export function Home() {
                 alt="carro"
                 onLoad={() => handleImageLoad(car.id)}
                 style={{
-                  display: loadImages.includes(car.id) ? "block" : "none",
+                  display: loadImages.includes(car.id) ? "block" : "visible",
                 }}
               />
               <p className="font-bold mt-1 mb-2 px-2">{car.name}</p>
