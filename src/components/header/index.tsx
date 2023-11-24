@@ -7,10 +7,14 @@ import { FiUser, FiLogIn } from "react-icons/fi";
 export function Header() {
   const { loadingAuth, signed } = useContext(AuthContext);
 
+  function refreshPage() {
+    window.location.reload();
+  }
+
   return (
     <div className="w-full flex items-center justify-center h-16 bg-white drop-shadow mb-4 ">
       <header className="flex w-full items-center justify-between max-w-7xl px-4 mx-auto">
-        <Link to="/">
+        <Link to="/" onClick={refreshPage}>
           <img src={logoImg} alt="logo web carros" />
         </Link>
 
