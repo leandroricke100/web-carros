@@ -63,7 +63,6 @@ export function Dashboard() {
         });
 
         setCars(listcars);
-        console.log(listcars);
       });
     }
 
@@ -84,7 +83,7 @@ export function Dashboard() {
         await deleteObject(imageRef);
         setCars(cars.filter((car) => car.id !== itemsCar.id));
       } catch (erro) {
-        console.log(erro);
+        /* empty */
       }
     });
   }

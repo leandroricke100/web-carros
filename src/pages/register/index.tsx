@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logoImg from "../../assets/logo.svg";
@@ -64,13 +65,9 @@ export function Register() {
           uid: user.user.uid,
         });
 
-        console.log("Cadastrado com sucesso");
         navigate("/dashboard", { replace: true });
       })
-      .catch((error) => {
-        console.log("Erro ao cadastrar");
-        console.log(error);
-      });
+      .catch((_error) => {});
   }
 
   return (

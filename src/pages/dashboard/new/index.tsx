@@ -63,7 +63,6 @@ export function New() {
   async function handleFile(e: ChangeEvent<HTMLInputElement>) {
     if (e.target.files && e.target.files[0]) {
       const image = e.target.files[0];
-      console.log(image);
 
       if (image.type === "image/jpeg" || image.type === "image/png") {
         await handleUpload(image);
@@ -120,20 +119,15 @@ export function New() {
       whatsapp: data.whatsapp,
       city: data.city,
       price: data.price,
-      desription: data.description,
+      description: data.description,
       created: new Date(),
       owner: user?.name,
       uid: user?.uid,
       images: carListImages,
-    })
-      .then(() => {
-        reset();
-        setCarImages([]);
-        console.log("cadastrado com sucesso");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    }).then(() => {
+      reset();
+      setCarImages([]);
+    });
   }
 
   async function handleDeleteImage(item: ImageItemProps) {
@@ -145,7 +139,7 @@ export function New() {
       await deleteObject(imageRef);
       setCarImages(carImages.filter((car) => car.url !== item.url));
     } catch (error) {
-      console.log(error);
+      /* empty */
     }
   }
 

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect } from "react";
 
 import { Link, useNavigate } from "react-router-dom";
@@ -44,15 +45,10 @@ export function Login() {
 
   function onSubmit(data: FormData) {
     signInWithEmailAndPassword(auth, data.email, data.password)
-      .then((user) => {
-        console.log("Logado com sucesso");
-        console.log(user);
+      .then((_user) => {
         navigate("/dashboard", { replace: true });
       })
-      .catch((error) => {
-        console.log("Erro ao cadastrar");
-        console.log(error);
-      });
+      .catch((_error) => {});
   }
 
   return (
