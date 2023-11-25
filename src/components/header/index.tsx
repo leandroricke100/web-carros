@@ -3,19 +3,20 @@ import { AuthContext } from "../../contexts/AuthContext";
 import logoImg from "../../assets/logo.svg";
 import { Link } from "react-router-dom";
 import { FiUser, FiLogIn } from "react-icons/fi";
+import { Home } from "../../pages/home";
 
 export function Header() {
-  const { loadingAuth, signed } = useContext(AuthContext);
+  const { signed, loadingAuth } = useContext(AuthContext);
 
   function refreshPage() {
-    window.location.reload();
+    Home();
   }
 
   return (
-    <div className="w-full flex items-center justify-center h-16 bg-white drop-shadow mb-4 ">
-      <header className="flex w-full items-center justify-between max-w-7xl px-4 mx-auto">
+    <div className="w-full flex items-center justify-center h-16 bg-white drop-shadow mb-4">
+      <header className="flex w-full max-w-7xl items-center justify-between px-4 mx-auto">
         <Link to="/" onClick={refreshPage}>
-          <img src={logoImg} alt="logo web carros" />
+          <img src={logoImg} alt="Logo do site" />
         </Link>
 
         {!loadingAuth && signed && (

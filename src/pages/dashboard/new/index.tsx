@@ -20,6 +20,7 @@ import {
   uploadBytes,
   getDownloadURL,
 } from "firebase/storage";
+import toast from "react-hot-toast";
 
 const schema = z.object({
   name: z.string().nonempty("O campo nome é obrigatório"),
@@ -67,7 +68,7 @@ export function New() {
       if (image.type === "image/jpeg" || image.type === "image/png") {
         await handleUpload(image);
       } else {
-        alert("Envie uma imagem jpge ou png");
+        toast.error("Envie uma imagem jpge ou png");
         return;
       }
     }
@@ -93,13 +94,14 @@ export function New() {
         };
 
         setCarImages((images) => [...images, imageItem]);
+        toast.success("Imagem cadastrada com sucesso!");
       });
     });
   }
 
   function onsubmit(data: FormData) {
     if (carImages.length === 0) {
-      alert("Envie alguma imagem!");
+      toast.error("Envie alguma imagem!");
       return;
     }
 
@@ -125,6 +127,7 @@ export function New() {
       uid: user?.uid,
       images: carListImages,
     }).then(() => {
+      toast.success("Carro cadastrado com sucesso!");
       reset();
       setCarImages([]);
     });
